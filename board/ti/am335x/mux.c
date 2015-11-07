@@ -319,7 +319,7 @@ void enable_board_pin_mux(struct am335x_baseboard_id *header)
 	if (1 || board_is_bone(header)) {
 		/* Beaglebone pinmux */
 		configure_module_pin_mux(i2c1_pin_mux);
-		configure_module_pin_mux(mii1_pin_mux);
+		configure_module_pin_mux(rgmii1_pin_mux);
 		configure_module_pin_mux(mmc0_pin_mux);
 #ifndef CONFIG_NOR
 		configure_module_pin_mux(mmc1_pin_mux);

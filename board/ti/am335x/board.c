@@ -552,12 +552,12 @@ static struct cpsw_slave_data cpsw_slaves[] = {
 	{
 		.slave_reg_ofs	= 0x208,
 		.sliver_reg_ofs	= 0xd80,
-		.phy_addr	= 0,
+		.phy_addr	= 4,
 	},
 	{
 		.slave_reg_ofs	= 0x308,
 		.sliver_reg_ofs	= 0xdc0,
-		.phy_addr	= 1,
+		.phy_addr	= 6,
 	},
 };
 
@@ -567,7 +567,7 @@ static struct cpsw_platform_data cpsw_data = {
 	.mdio_div		= 0xff,
 	.channels		= 8,
 	.cpdma_reg_ofs		= 0x800,
-	.slaves			= 1,
+	.slaves			= 2,
 	.slave_data		= cpsw_slaves,
 	.ale_reg_ofs		= 0xd00,
 	.ale_entries		= 1024,
@@ -644,9 +644,9 @@ int board_eth_init(bd_t *bis)
 
 	if (board_is_bone(&header) || board_is_bone_lt(&header) ||
 	    board_is_idk(&header)) {
-		writel(MII_MODE_ENABLE, &cdev->miisel);
+		writel(RGMII_MODE_ENABLE, &cdev->miisel);
 		cpsw_slaves[0].phy_if = cpsw_slaves[1].phy_if =
-				PHY_INTERFACE_MODE_MII;
+				PHY_INTERFACE_MODE_RGMII;
 	} else {
 		writel((RGMII_MODE_ENABLE | RGMII_INT_DELAY), &cdev->miisel);
 		cpsw_slaves[0].phy_if = cpsw_slaves[1].phy_if =
