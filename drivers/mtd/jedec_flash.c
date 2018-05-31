@@ -407,7 +407,7 @@ static inline void fill_info(flash_info_t *info, const struct amd_flash_info *je
 		       erase_region_count, erase_region_size);
 		for (j = 0; j < erase_region_count; j++) {
 			if (sect_cnt >= CONFIG_SYS_MAX_FLASH_SECT) {
-				printf("ERROR: too many flash sectors\n");
+				printf("ERROR: too many flash sectors and sect_cnt is %d\n",sect_cnt);
 				break;
 			}
 			info->start[sect_cnt] = base;

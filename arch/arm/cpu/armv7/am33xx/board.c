@@ -211,6 +211,7 @@ void s_init(void)
 	 */
 #ifdef CONFIG_NOR_BOOT
 	enable_norboot_pin_mux();
+	//puts("*********************************enabl enorboot_pin_mux*************************************************");
 #endif
 	/*
 	 * Save the boot parameters passed from romcode.

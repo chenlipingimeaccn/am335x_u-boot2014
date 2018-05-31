@@ -1,4 +1,4 @@
-TARGEDIR="/home/chengpg/tftp"
+TARGEDIR="/home/usr/src"
 SRCIMG="u-boot.img MLO"
 
 make distclean

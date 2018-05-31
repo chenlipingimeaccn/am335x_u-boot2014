@@ -191,6 +191,7 @@ static struct module_pin_mux nand_pin_mux[] = {
 };
 
 #if defined(CONFIG_NOR) && !defined(CONFIG_NOR_BOOT)
+// #if defined(CONFIG_NOR)
 static struct module_pin_mux bone_norcape_pin_mux[] = {
     {OFFSET(gpmc_a1), MODE(0) | PULLUDDIS},
     {OFFSET(gpmc_a2), MODE(0) | PULLUDDIS},
@@ -229,6 +230,7 @@ static struct module_pin_mux bone_norcape_pin_mux[] = {
 #endif
 
 #if defined(CONFIG_NOR_BOOT)
+
 void enable_norboot_pin_mux(void)
 {
 	asm("stmfd      sp!, {r2 - r4}");
@@ -242,6 +244,8 @@ void enable_norboot_pin_mux(void)
 	asm("bne        gpmc_mux");
 	asm("ldmfd      sp!, {r2 - r4}");
 }
+
+
 #endif
 
 void enable_uart0_pin_mux(void)
@@ -326,6 +330,7 @@ void enable_board_pin_mux(struct am335x_baseboard_id *header)
 #endif
 #if defined(CONFIG_NOR) && !defined(CONFIG_NOR_BOOT)
 		configure_module_pin_mux(bone_norcape_pin_mux);
+		puts("*********************************enable norcape pinmux*************************************************");
 #endif
 	} else if (board_is_gp_evm(header)) {
 		/* General Purpose EVM */

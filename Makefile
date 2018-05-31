@@ -196,7 +196,7 @@ VENDOR=
 
 # set default to nothing for native builds
 ifeq ($(HOSTARCH),$(ARCH))
-CROSS_COMPILE ?=
+CROSS_COMPILE = arm-linux-
 endif
 
 # SHELL used by kbuild

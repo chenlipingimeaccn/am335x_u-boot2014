@@ -75,8 +75,8 @@
 	"console=ttyO0,115200n8\0" \
 	"consoleblank=0\0" \
 	"mmc_dev=0\0" \
-	"mmc_root=/dev/ram rw \0" \
-	"mmc_root_fs_type=ext2\0" \
+	"mmc_root=/dev/mmcblk0p2 rw \0" \
+	"mmc_root_fs_type=ext3\0" \
 	"dispmode=LVDS\0" \
 	"rootpath=/export/rootfs\0" \
 	"nfsopts=nolock\0" \
@@ -158,6 +158,7 @@
                 "dispmode=${dispmode} " \
                 "root=${dvsdk_root}  " \
                 "rootfstype=${dvsdk_root_fs_type} " \
+		"mtdparts=physmap-flash.0:4m(u-boot),4m(kernel),-(rootfs)"\
                 "earlyprintk\0 " \
 	"net_args=run bootargs_defaults;" \
 		"setenv bootargs ${bootargs} " \
@@ -177,10 +178,18 @@
 		"run net_args; " \
 		"bootm ${kloadaddr}\0" \
         "updatesys=mmc rescan;" \
-                "fatload mmc 0 0x82000000 uImage;protect off 0x08300000 +${filesize};"\
-                "erase 0x08300000 +${filesize};"\
-                "cp.b 0x82000000 0x08300000 ${filesize};"\
-                "protect on 0x08300000 +${filesize};\0" \
+		"fatload mmc 0 0x82000000 u-boot.bin;protect off 0x08000000 +${filesize};"\
+                "erase 0x08000000 +${filesize};"\
+                "cp.b 0x82000000 0x08000000 ${filesize};"\
+                "protect on 0x08000000 +${filesize};" \
+                "fatload mmc 0 0x82000000 uImage;protect off 0x08400000 +${filesize};"\
+                "erase 0x08400000 +${filesize};"\
+                "cp.b 0x82000000 0x08400000 ${filesize};"\
+                "protect on 0x08400000 +${filesize};" \
+		"fatload mmc 0 0x82000000 jffs2.img;protect off 0x08800000 +${filesize};"\
+                "erase 0x08800000 +${filesize};"\
+                "cp.b 0x82000000 0x08800000 ${filesize};"\
+                "protect on 0x08800000 +${filesize};\0" \
         "clearenv=protect off 0x09fe0000 +0x20000;erase  0x09fe0000 +0x20000\0"
 
 
@@ -448,9 +457,9 @@
 #define CONFIG_SYS_FLASH_CFI
 #define CONFIG_FLASH_CFI_DRIVER
 #define CONFIG_FLASH_CFI_MTD
-#define CONFIG_SYS_MAX_FLASH_SECT	256
-#define CONFIG_SYS_MAX_FLASH_BANKS	1
-#define CONFIG_SYS_FLASH_SIZE		(0x02000000)
+#define CONFIG_SYS_MAX_FLASH_SECT	1024/ 256
+#define CONFIG_SYS_MAX_FLASH_BANKS	1//1
+#define CONFIG_SYS_FLASH_SIZE		(0x08000000)//(0x02000000)
 #define CONFIG_SYS_FLASH_BASE		(0x08000000)
 #define CONFIG_SYS_FLASH_CFI_WIDTH	FLASH_CFI_16BIT
 #define CONFIG_SYS_MONITOR_BASE		CONFIG_SYS_FLASH_BASE
