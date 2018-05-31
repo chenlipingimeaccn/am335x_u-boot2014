@@ -66,6 +66,9 @@ void gpmc_init(void)
 	if (CONFIG_SYS_FLASH_SIZE == 0x02000000) {
 		size = GPMC_SIZE_32M;
 	}
+	else if(CONFIG_SYS_FLASH_SIZE == 0x08000000) {
+		size = GPMC_SIZE_128M;	
+	}
 #endif
 #elif defined(CONFIG_NAND)
 /* configure GPMC for NAND */

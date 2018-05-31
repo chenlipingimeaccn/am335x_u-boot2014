@@ -201,6 +201,8 @@ static struct module_pin_mux bone_norcape_pin_mux[] = {
     {OFFSET(gpmc_a6), MODE(0) | PULLUDDIS},
     {OFFSET(gpmc_a7), MODE(0) | PULLUDDIS},
     {OFFSET(gpmc_a8), MODE(0) | PULLUDDIS},
+    {OFFSET(gpmc_a9), MODE(0) | PULLUDDIS},
+    {OFFSET(gpmc_a10), MODE(0) | PULLUDDIS},
 
 	{OFFSET(gpmc_ad0), MODE(0) | PULLUDEN | RXACTIVE},      /* NOR_AD0 */
 	{OFFSET(gpmc_ad1), MODE(0) | PULLUDEN | RXACTIVE},      /* NOR_AD1 */
